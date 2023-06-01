@@ -7,6 +7,8 @@ Stampare (in console)
 <br>
 <br>
 
+- **0**
+  - Mi prepraro le variabili che contengono i 2 risultati.
 - **1**
   - Genero tramite la funzion RANDOM un numero da 0 a 6 da assegnare all'utente.
 - **2**
@@ -17,6 +19,8 @@ Stampare (in console)
   - Gli do in console il messaggio "bravo hai vinto"
  **SE HA VINTO il computer**
   - Gli do in console il messaggio "Peccato non hai vinto"
+  **4**
+  - Inserisco l'elemento in pagina
 **FINE**  
 */ 
 
@@ -26,32 +30,41 @@ Stampare (in console)
         OPERAZIONI PRELIMINARI
 ---------------------------------------*/
 
-// # 0 Recupero l'ememento dal DOM
-const listElements = document.getElementById('numbers-list');
+// # 0 Recupero l'elemento dal DOM
+const resultElement = document.getElementById('result')
+
+// # 1 Setto le varibili e trovo i numeri random
+let PCresult = Math.floor (Math.random() * 6) + 1;
+let USERresult = Math.floor(Math.random() * 6) + 1 ;
+
+console.log(PCresult);
+console.log(USERresult);
+
+let result = 'Pareggio!';
+
+
+function casuale() {
+    num = Math.round(Math.random() * 100);
+    document.getElementById("casuale").innerHTML ="Risultato uscito " + num;
+}
 
 /*---------------------------------------
         PROGRAMMA
 ---------------------------------------*/
 
-// # 1 Creo il ciclo "for"
-for (let i = 1; i <= 100; i++) {
-
-    let square = i;
-
-  if (i % 3 === 0 && i % 5 === 0) {
-    square = 'FizzBuzz';   
-   
-} else if (i % 3 === 0) { 
-    square = 'Fizz';  
-
-} else if (i % 5 === 0) { 
-    square = 'Buzz';
+// # 2 Controllo chi ha vinto.
+if (USERresult > PCresult) {
+  result = 'Ha vinto il giocatore';
+} else if (USERresult < PCresult) {
+  result = 'Ha vinto il computer';
 }
 
- console.log (square);
- // stampo in pagina
+// # 3 Inserisco il risultato in pagina
+resultElement.innerHTML = `
+<p>Tiro Giocatore: ${USERresult}</p>
+<p>Tiro Computer: ${PCresult}</p>
+<p><strong>${result}</strong></p>
 
- const myClass = `${square}`.toLowerCase();
 
- listElements.innerHTML += `<li class=${myClass}>${square}</li>`;
-}
+
+`;
