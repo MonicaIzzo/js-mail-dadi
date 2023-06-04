@@ -14,17 +14,20 @@ console.log('JS OK')
 <br>
 <br>
 
-- **1**
-  - Prepararo l'arrey che contiente tutti gli indirizzi.
+- **0**
+  - Recupero l'elemento dal DOM
+  - **1**
+  - Prepararo l'arrey che contiente tutti gli indirizzi verificati.
 - **2**
-  - Setto il pront di richiesta email utente
+  - Setto il button email utente.
   
 - **3**
   - Eseguo un ciclo "IF" per capire se il nominativo è in lista.
-  **SE NO**
-  - Gli do il benvenuto in console.
+- **4**  
   **SE SI**
-  - Gli do il messaggio che il login è stato negato sempre in console.
+  - Gli do il benvenuto in pagina.
+  **SE NO**
+  - Gli do il messaggio che il login è stato negato sempre in pagina.
 **FINE**  
 */ 
 
@@ -35,31 +38,35 @@ console.log('JS OK')
 ---------------------------------------*/
 
 // # 0 Recupero l'ememento dal DOM
-const listElements = document.getElementById('numbers-list');
+const emailImput = document.getElementById('email');
+const button = document.getElementById('button');
+const message = document.getElementById('message');
+
+// # 1 Prepararo l'arrey
+const allowedEmails = ['cristina@verderamina.it', 'info@monicaizzo.net', 'ciroserver@libero.it', 'monicaizzo.adv@gmail.com', 'info@tattikats.com', 'info@degustibus.re.it']
+
+// # 2 Setto il button email utente.
+button.addEventListener('click', function (){
+let result = 'Non sei autorizzato'
+const userEmail = emailImput.value.trim();
+console.log('userEmail');
+
 
 /*---------------------------------------
         PROGRAMMA
 ---------------------------------------*/
 
-// # 1 Creo il ciclo "for"
-for (let i = 1; i <= 100; i++) {
+// # 3 Creo il ciclo "for"
+for (let i = 0; i < allowedEmails.length; i++) {
+  const email = allowedEmails [i]
 
-    let square = i;
+// # 2 Creo il ciclo "if"
 
-  if (i % 3 === 0 && i % 5 === 0) {
-    square = 'FizzBuzz';   
-   
-} else if (i % 3 === 0) { 
-    square = 'Fizz';  
-
-} else if (i % 5 === 0) { 
-    square = 'Buzz';
+  if (email === userEmail) {
+    result = 'Sei autorizzato';
+  }
 }
 
- console.log (square);
- // stampo in pagina
-
- const myClass = `${square}`.toLowerCase();
-
- listElements.innerHTML += `<li class=${myClass}>${square}</li>`;
-}
+// # 4 Stampo il risultato in pagina
+message.innerText = result;
+});
