@@ -45,11 +45,13 @@ const message = document.getElementById('message');
 // # 1 Prepararo l'arrey
 const allowedEmails = ['cristina@verderamina.it', 'info@monicaizzo.net', 'ciroserver@libero.it', 'monicaizzo.adv@gmail.com', 'info@tattikats.com', 'info@degustibus.re.it']
 
-// # 2 Setto il button email utente.
+// # 2 Metto in ascolto il button.
 button.addEventListener('click', function (){
-let result = 'Non sei autorizzato'
+// raccolgo l'input dell'utente
 const userEmail = emailImput.value.trim();
 console.log('userEmail');
+// preparo il messaggio
+let isAllowed = false;
 
 
 /*---------------------------------------
@@ -57,16 +59,17 @@ console.log('userEmail');
 ---------------------------------------*/
 
 // # 3 Creo il ciclo "for"
-for (let i = 0; i < allowedEmails.length; i++) {
+for (let i = 0; i < allowedEmails.length && isAllowed === false; i++) {
   const email = allowedEmails [i]
 
 // # 2 Creo il ciclo "if"
 
   if (email === userEmail) {
-    result = 'Sei autorizzato';
+    isAllowed = true;
   }
 }
 
 // # 4 Stampo il risultato in pagina
+const result = isAllowed ? 'Sei autorizzato' : 'Non sei autorizzato';
 message.innerText = result;
 });
